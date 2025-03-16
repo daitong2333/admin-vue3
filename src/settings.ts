@@ -10,7 +10,7 @@ const mediaQueryList = window.matchMedia("(prefers-color-scheme: dark)");
 
 const defaultSettings: AppSettings = {
   // 系统Title
-  title: pkg.name,
+  title: "演示案例demo" || pkg.name,
   // 系统版本
   version: pkg.version,
   // 是否显示设置
