@@ -2,7 +2,7 @@ import type { NavigationGuardNext, RouteLocationNormalized, RouteRecordRaw } fro
 import NProgress from "@/utils/nprogress";
 import { getAccessToken } from "@/utils/auth";
 import router from "@/router";
-import { usePermissionStore, useUserStore } from "@/store";
+import { usePermissionStore, useUserStore,useDictStore } from "@/store";
 
 export function setupPermission() {
   // 白名单路由
@@ -10,8 +10,27 @@ export function setupPermission() {
 
   router.beforeEach(async (to, from, next) => {
     NProgress.start();
-
+ 
     const isLogin = !!getAccessToken(); // 判断是否登录
+    // 首次才需要进入
+    if(!!to.query.skipLogin && !isLogin){
+      console.log('已经进入免登入')
+      const userStore = useUserStore();
+      const dictStore = useDictStore();
+      await userStore.login({
+        username: "admin",
+        password: "123456",
+        captchaKey: "",
+        captchaCode: "",
+      })
+        .then(async () => {
+          await userStore.getUserInfo();
+          // 需要在路由跳转前加载字典数据，否则会出现字典数据未加载完成导致页面渲染异常
+          await dictStore.loadDictionaries();
+          next({ path: "/" });
+        })
+      
+    }
     if (isLogin) {
       if (to.path === "/login") {
         // 已登录，访问登录页，跳转到首页
@@ -80,7 +99,7 @@ export function hasAuth(value: string | string[], type: "button" | "role" = "but
   if (type === "button" && roles.includes("ROOT")) {
     return true;
   }
-
+  console.log('用户信息',roles, perms)
   const auths = type === "button" ? perms : roles;
   return typeof value === "string"
     ? auths.includes(value)

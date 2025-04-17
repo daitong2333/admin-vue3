@@ -10,8 +10,7 @@
     "build-only": "vite build",
     "preinstall": "npx only-allow pnpm"
   },
-  "config": {
-  },
+  "config": {},
   "dependencies": {
     "@element-plus/icons-vue": "^2.3.1",
     "@stomp/stompjs": "^7.0.0",
@@ -27,6 +26,7 @@
     "element-plus": "^2.9.5",
     "exceljs": "^4.4.0",
     "lodash-es": "^4.17.21",
+    "mqtt": "^5.11.0",
     "nprogress": "^0.2.0",
     "path-browserify": "^1.0.1",
     "path-to-regexp": "^8.2.0",
@@ -35,7 +35,8 @@
     "sortablejs": "^1.15.6",
     "vue": "^3.5.13",
     "vue-i18n": "^11.1.1",
-    "vue-router": "^4.5.0"
+    "vue-router": "^4.5.0",
+    "vue3-seamless-scroll": "^3.0.2"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.7.1",

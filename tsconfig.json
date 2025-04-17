@@ -28,6 +28,6 @@
     "types": ["node", "vite/client", "element-plus/global"]
   },
 
-  "include": ["mock/**/*.ts", "src/**/*.ts", "src/**/*.vue", "vite.config.ts"],
+  "include": ["mock/**/*.ts", "src/**/*.ts", "src/**/*.vue", "vite.config.ts", "src/views/dashboard/useMqtt.js"],
   "exclude": ["node_modules", "dist"]
 }

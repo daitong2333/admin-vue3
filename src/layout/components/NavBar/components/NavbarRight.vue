@@ -95,7 +95,10 @@ function logout() {
         tagsViewStore.delAllViews();
       })
       .then(() => {
-        router.push(`/login?redirect=${route.fullPath}`);
+        console.log('会记录当前route',route)
+        let redictUrl = "/dashboard"
+        router.push(`/login?redirect=${redictUrl}`);
+        // router.push(`/login?redirect=${route.fullPath}`);
       });
   });
 }
